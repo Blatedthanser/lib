@@ -39,7 +39,8 @@ namespace SortConfig {
         /**
          * Not implemented.
          */
-        Selection
+        Selection,
+        
     };
 }
 
