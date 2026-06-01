@@ -3,6 +3,11 @@
 
 #include "ISort.h"
 
+/**
+ * Stable.
+ * θ(N²).
+ * Space complexity: θ(1).
+ */
 template<class T>
 class BubbleSort : public ISort<T> {
 private:
