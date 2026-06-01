@@ -29,11 +29,12 @@ namespace SortConfig {
          */
         Quick,
         /**
+         * Stable.
          * Not implemented.
          */
         Merge,
         /**
-         * Stable.
+         * Not stable.
          * Not implemented.
          */
         Heap,
