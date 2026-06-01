@@ -1,10 +1,10 @@
 #ifndef SORTER_H
 #define SORTER_H
 
-#include "ISort.h"
 #include "InsertionSort.h"
 #include "BubbleSort.h"
 #include "QuickSort.h"
+#include "SelectionSort.h"
 
 namespace SortConfig {
     enum class Algorithm {
@@ -18,7 +18,7 @@ namespace SortConfig {
         /**
          * Stable.
          * θ(N²).
-         * 
+         * Space complexity: θ(1).
          */
         Bubble,
         /**
@@ -33,11 +33,14 @@ namespace SortConfig {
          */
         Merge,
         /**
+         * Stable.
          * Not implemented.
          */
         Heap,
         /**
-         * Not implemented.
+         * Not stable.
+         * θ(N²).
+         * Space complexity: θ(1)
          */
         Selection
     };
@@ -66,6 +69,9 @@ public:
             break;
         case SortConfig::Algorithm::Quick:
             iSort = new QuickSort<T>();
+            break;
+        case SortConfig::Algorithm::Selection:
+            iSort = new SelectionSort<T>();
             break;
         default:
             iSort = new InsertionSort<T>();

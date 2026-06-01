@@ -20,6 +20,7 @@ private:
      * Slower than mergeSort.
      */
     void naivePartition(T* arr, int size) {
+        if (size <= 1) return;
         T pivot = arr[0];
         T* tmp_arr = new T[size];
         int front = 0, rear = size - 1;
@@ -38,7 +39,7 @@ private:
         }
         delete[] tmp_arr;
         naivePartition(arr, front);
-        naivePartition(arr + mid, size - mid);
+        naivePartition(arr + rear + 1, size - rear - 1);
     }
 
     /**
@@ -47,21 +48,23 @@ private:
      * Quicker than mergeSort.
      */
     void hoarePartition(T* arr, int size) {
+        if (size <= 1) return;
         T pivot = arr[0];
-        int L = 1, G = size - 1;
-        while (L <= G) {
-            while (arr[L] < pivot) L++;
-            while (arr[G] > pivot) G--;
+        int L = -1, G = size; // L has to be -1 to prevent L going all the way down and exceeding size
+        while (true) {
+            do { L++; } while (arr[L] < pivot);
+            do { G--; } while (arr[G] > pivot);
+            // if multiple pivots appear continuously, while() {} is gonna fall into infinite loop
+            if (L >= G) break;
             swap(arr, L, G);
-            L++;
-            G--;
         }
-        swap(arr, 0, G + 1);
+        hoarePartition(arr, G + 1);
+        hoarePartition(arr + G + 1, size - G - 1);
     }
 public:
     void sort(T* arr, int size) override {
         if (size <= 1) return;
-        naivePartition(arr, size);
+        hoarePartition(arr, size);
     }
 };
 
