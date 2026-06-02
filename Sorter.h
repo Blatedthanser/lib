@@ -37,7 +37,7 @@ namespace SortConfig {
          * Not stable.
          * Not implemented.
          */
-        minHeap,
+        MinHeap,
         /**
          * Not stable.
          * θ(N²).
