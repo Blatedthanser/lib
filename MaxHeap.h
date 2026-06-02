@@ -50,6 +50,21 @@ private:
         }
     }
 
+protected:
+
+    int* getArray() {
+        return arr;
+    }
+    void putMaxToEnd() {
+        int max = arr[1];
+        arr[1] = arr[size--];
+        percolateDown(1);
+        arr[size + 1] = max;
+    }
+
+    template <class T>
+    friend class HeapSort;
+
 public:
     int size;
     MaxHeap(int cap = 100) : capacity(cap), size(0) {
@@ -72,11 +87,14 @@ public:
     }
 
     void pop() {
-
         arr[1] = arr[size--];
         percolateDown(1);
     }
 
+    /**
+     * Use _arr to build a MaxHeap.
+     * Doesn't mutate _arr
+     */
     void buildHeap(int* _arr, int _size) {
         size = _size;
         resize(size + 1);

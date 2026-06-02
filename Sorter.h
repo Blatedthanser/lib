@@ -5,6 +5,7 @@
 #include "BubbleSort.h"
 #include "QuickSort.h"
 #include "SelectionSort.h"
+#include "HeapSort.h"
 
 namespace SortConfig {
     enum class Algorithm {
@@ -37,7 +38,7 @@ namespace SortConfig {
          * Not stable.
          * Not implemented.
          */
-        MinHeap,
+        Heap,
         /**
          * Not stable.
          * θ(N²).
@@ -75,6 +76,8 @@ public:
         case SortConfig::Algorithm::Selection:
             iSort = new SelectionSort<T>();
             break;
+        case SortConfig::Algorithm::Heap:
+            iSort = new HeapSort<T>();
         default:
             iSort = new InsertionSort<T>();
             break;
