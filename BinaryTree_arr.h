@@ -1,10 +1,10 @@
-#ifndef BINARYTREE_H
-#define BINARYTREE_H
+#ifndef BINARYTREE_ARR_H
+#define BINARYTREE_ARR_H
 
 #include <iostream> // For std::cerr
 #include <stdexcept> // For throw
 
-template <class T, class NodeType> class BinaryTree;
+template <class T, class NodeType> class BinaryTree_arr;
 
 namespace tree_details {
     /**
@@ -30,7 +30,7 @@ namespace tree_details {
             left(l), right(r), value(v) {
         }
         template <class U, class V>
-        friend class ::BinaryTree;
+        friend class ::BinaryTree_arr;
     };
 }
 
@@ -41,7 +41,7 @@ namespace tree_details {
  * and continuous indexing starting from 0.
  */
 template <class T, class NodeType = tree_details::BTNode<T>>
-class BinaryTree {
+class BinaryTree_arr {
 protected:
 
     int capacity;
@@ -65,10 +65,10 @@ protected:
 public:
 
     int size;
-    BinaryTree(int cap = 100) : size(0), capacity(cap) {
+    BinaryTree_arr(int cap = 100) : size(0), capacity(cap) {
         tree = new NodeType[cap];
     }
-    ~BinaryTree() { // I really don't need polymorphyism
+    ~BinaryTree_arr() { // I really don't need polymorphyism
         delete[] tree;
     }
     /**

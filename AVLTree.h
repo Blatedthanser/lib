@@ -1,7 +1,7 @@
 #ifndef AVLTREE_H
 #define AVLTREE_H
 
-#include "BinaryTree.h"
+#include "BinaryTree_arr.h"
 #include <cmath>
 #include <algorithm>
 
@@ -24,7 +24,7 @@ namespace tree_details {
  * Inherit all requirements of BinaryTree.
  */
 template <class T>
-class AVLTree : public BinaryTree<T, tree_details::AVLNode<T>> {
+class AVLTree : public BinaryTree_arr<T, tree_details::AVLNode<T>> {
 private:
     using Node = tree_details::AVLNode<T>; // Alias
 
