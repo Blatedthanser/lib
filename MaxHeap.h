@@ -1,10 +1,10 @@
-#ifndef MINHEAP_H
-#define MINHEAP_H
+#ifndef MAXHEAP_H
+#define MAXHEAP_H
 
 #include <cmath>
 #include <algorithm>
 using namespace std;
-class MinHeap {
+class MaxHeap {
 
 private:
     int* arr;
@@ -26,7 +26,7 @@ private:
     }
     void percolateUp(int index) {
         if (index <= 1) return;
-        if (arr[index] < arr[index / 2]) {
+        if (arr[index] > arr[index / 2]) {
             swap(index, index / 2);
             percolateUp(index / 2);
         }
@@ -36,27 +36,27 @@ private:
             return;
         }
         int left = 2 * index, right = 2 * index + 1;
-        int smallestIndex = index;
+        int biggestIndex = index;
 
-        if (left <= size && arr[left] < arr[smallestIndex]) {
-            smallestIndex = left;
+        if (left <= size && arr[left] > arr[biggestIndex]) {
+            biggestIndex = left;
         }
-        if (right <= size && arr[right] < arr[smallestIndex]) {
-            smallestIndex = right;
+        if (right <= size && arr[right] > arr[biggestIndex]) {
+            biggestIndex = right;
         }
-        if (smallestIndex != index) {
-            swap(index, smallestIndex);
-            percolateDown(smallestIndex);
+        if (biggestIndex != index) {
+            swap(index, biggestIndex);
+            percolateDown(biggestIndex);
         }
     }
 
 public:
     int size;
-    MinHeap(int cap = 100) : capacity(cap), size(0) {
+    MaxHeap(int cap = 100) : capacity(cap), size(0) {
         arr = new int[cap + 1];
         arr[0] = 0; // Abandon arr[0]
     };
-    ~MinHeap() {
+    ~MaxHeap() {
         delete[] arr;
     }
     void push(int x) {
@@ -67,7 +67,7 @@ public:
         percolateUp(size); // Size has incremented by 1
     }
 
-    int getMin() {
+    int getMax() {
         return arr[1];
     }
 
