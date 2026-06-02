@@ -37,14 +37,14 @@ namespace SortConfig {
          * Not stable.
          * Not implemented.
          */
-        Heap,
+        minHeap,
         /**
          * Not stable.
          * θ(N²).
          * Space complexity: θ(1)
          */
         Selection,
-        
+
     };
 }
 

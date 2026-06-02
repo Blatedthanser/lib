@@ -64,11 +64,10 @@ private:
     }
 
 public:
-    AVLTree(int cap = 100) : BinaryTree<T, Node>(cap) {
-        this->tree = new Node[cap];
-    }
-    void insert(int _index, int _left, int _right, T _value = T()) override {
-        BinaryTree<T, Node>::insert(_index, _left, _right, _value);
+    using BinaryTree_arr<T, Node>::BinaryTree_arr;
+    
+    void insert(int _index, int _left = -1, int _right = -1, T _value = T()) override {
+        BinaryTree_arr<T, Node>::insert(_index, _left, _right, _value);
         updateHeight();
     }
 

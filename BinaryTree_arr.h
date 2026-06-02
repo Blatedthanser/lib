@@ -3,6 +3,9 @@
 
 #include <iostream> // For std::cerr
 #include <stdexcept> // For throw
+#include <queue> // For levelOrder()
+#include <vector> // For leverOrder()
+using namespace std; // For vector and queue and print
 
 template <class T, class NodeType> class BinaryTree_arr;
 
@@ -29,6 +32,11 @@ namespace tree_details {
         BTNode(int l = -1, int r = -1, T v = T()) :
             left(l), right(r), value(v) {
         }
+        /**
+         * We don't have copy constructor currently.
+         * If T is some weird object, then we're cooked.
+         */
+
         template <class U, class V>
         friend class ::BinaryTree_arr;
     };
@@ -62,6 +70,14 @@ protected:
         return tree[index];
     }
 
+    void resize(int cap) {
+        NodeType* new_tree = new NodeType[cap];
+        for (int i = 0; i < size; i++) {
+            new_tree[i] = tree[i]; // No copy constructor
+        }
+        tree = new_tree;
+    }
+
 public:
 
     int size;
@@ -76,17 +92,20 @@ public:
      * Index must be non-negative and less than capacity.
      * Empty left or right child is represented as -1.
      */
-    virtual void insert(int _index, int _left, int _right, T _value = T()) {
+    virtual void insert(int _index, int _left = -1, int _right = -1, T _value = T()) {
         if (_index < 0 || _index >= capacity) {
             std::cerr << "Insertion index out of range [0, cap("
                 << capacity << ")), inserting at: "
                 << _index << endl;
             throw std::out_of_range("");
         }
-        if (size >= capacity) {
-            std::cerr << "No extra space. Insertion failed." << endl;
-            throw std::length_error("");
+        if (size >= capacity * 0.75) {
+            resize(2 * capacity);
         }
+        // if (size >= capacity) {
+        //     std::cerr << "No extra space. Insertion failed." << endl;
+        //     throw std::length_error("");
+        // }
         NodeType& current = tree[_index];
         current.left = _left;
         current.right = _right;
@@ -136,7 +155,47 @@ public:
         return subSize;
     }
 
+    /**
+     * Level Order.
+     */
+    vector<vector<int>> levelOrder() const {
+        vector<vector<int>> result;
+        int root = getRoot();
+        if (root == -1) return result;
 
+        queue<int> que;
+        que.push(root);
+
+        while (!que.empty()) {
+            int currentLevelSize = que.size();
+            vector<int> currentLevel;
+
+            for (int i = 0; i < currentLevelSize; i++) {
+                int node = que.front();
+                que.pop();
+                currentLevel.push_back(node);
+                if (get(node).left != -1) {
+                    que.push(get(node).left);
+                }
+                if (get(node).right != -1) {
+                    que.push(get(node).right);
+                }
+            }
+            result.push_back(currentLevel);
+        }
+        return result;
+    }
+
+    void print() const {
+        vector<vector<int>> order = levelOrder();
+        for (const auto& level : order) {
+            cout << "[ ";
+            for (int val : level) {
+                cout << val << " ";
+            }
+            cout << "]" << endl;
+        }
+    }
 };
 
 #endif
