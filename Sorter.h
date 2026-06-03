@@ -16,12 +16,15 @@ namespace SortConfig {
          * Note: Time is proportional to numbers of inversions.
          */
         Insertion,
+
         /**
          * Stable.
          * θ(N²).
          * Space complexity: θ(1).
+         * Note: The most primitive sorting algorithm.
          */
         Bubble,
+
         /**
          * Not stable.
          * On average θ(NlogN).
@@ -29,19 +32,24 @@ namespace SortConfig {
          * Note: the fastest sorting algorithm.
          */
         Quick,
+
         /**
          * Stable.
          * Not implemented.
          */
         Merge,
+
         /**
          * Not stable.
-         * Not implemented.
+         * Best case: θ(N), worst case: θ(NlogN)
+         * Space complexity: θ(1)
+         * Note: Bad cache performance.
          */
         Heap,
+
         /**
          * Not stable.
-         * θ(N²).
+         * θ(N²)
          * Space complexity: θ(1)
          */
         Selection,
