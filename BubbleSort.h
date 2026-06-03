@@ -7,6 +7,7 @@
  * Stable.
  * θ(N²).
  * Space complexity: θ(1).
+ * Note: The most primitive sorting algorithm.
  */
 template<class T>
 class BubbleSort : public ISort<T> {

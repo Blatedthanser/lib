@@ -4,6 +4,12 @@
 #include "ISort.h"
 #include "MaxHeap.h"
 
+/**
+ * Not stable.
+ * Best case: θ(N), worst case: θ(NlogN)
+ * Space complexity: θ(1)
+ * Note: Bad cache performance.
+ */
 template <class T>
 class HeapSort : public ISort<T> {
 public:

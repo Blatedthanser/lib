@@ -5,7 +5,7 @@
 
 /**
  * Not stable.
- * θ(N²).
+ * θ(N²)
  * Space complexity: θ(1)
  */
 template <class T>
