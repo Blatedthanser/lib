@@ -54,6 +54,23 @@ namespace SortConfig {
          */
         Selection,
 
+        // === === === θ(N) algorithms === === === //
+        /**
+         * Sleep sort: Items have to be non-negative numbers.
+         *  The operating systems will slow down the execution.
+         * 
+         * Counting sort: Stable.
+         * Requires finite numbers of kinds of items.
+         *  Great when the number of kinds is smaller than the size of alphabet.
+         *  (If the items are numbers, the size of alphabet is the max number.)
+         * 
+         * Radix sort: LSD is stable.
+         * Items have to be numbers.
+         *  Great when the numbers are larger than number of numbers.
+         *  The underlying sorting algorithm has to be stable.
+         * NOTICE: MSD needs partition&recursion
+         * 
+         */
     };
 }
 
