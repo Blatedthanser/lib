@@ -7,6 +7,8 @@
 #include "SelectionSort.h"
 #include "HeapSort.h"
 
+#include <type_traits> // For HeapSort
+
 namespace SortConfig {
     enum class Algorithm {
         /**
@@ -44,6 +46,7 @@ namespace SortConfig {
          * Best case: θ(N), worst case: θ(NlogN)
          * Space complexity: θ(1)
          * Note: Bad cache performance.
+         * Only support numbers for now.
          */
         Heap,
 
@@ -102,7 +105,10 @@ public:
             iSort = new SelectionSort<T>();
             break;
         case SortConfig::Algorithm::Heap:
-            iSort = new HeapSort<T>();
+            if constexpr (std::is_same_v<T, int>) {
+                iSort = new HeapSort<int>();
+            }
+            // Or go to default
         default:
             iSort = new InsertionSort<T>();
             break;

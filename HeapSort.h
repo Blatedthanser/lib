@@ -14,7 +14,10 @@ template <class T>
 class HeapSort : public ISort<T> {
 public:
     void sort(T* arr, int size) override {
-        MaxHeap heap = MaxHeap(size);
+        
+        if constexpr (!std::is_same_v<T, int>) return;
+
+        MaxHeap heap = MaxHeap(size); // MaxHeap only supports int
         heap.buildHeap(arr, size);
         int* new_arr = heap.getArray();
         for (int i = 0; i < size; i++) {
